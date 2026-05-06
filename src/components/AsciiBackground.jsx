@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { asciiFrames } from '../asciiFrames';
+import { randomAnimation } from "../asciiAnimations.js";
 
 const AsciiBackground = () => {
     const [frameIndex, setFrameIndex] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setFrameIndex((prev) => (prev + 1) % asciiFrames.length);
-        }, 70); // 70ms = ~14 fps
+            setFrameIndex((prev) => (prev + 1) % randomAnimation.frames.length);
+        }, randomAnimation.framerate); // 70ms = ~14 fps
         return () => clearInterval(interval);
     }, []);
 
@@ -40,10 +40,10 @@ const AsciiBackground = () => {
                 whiteSpace: 'pre',
                 userSelect: 'none',
                 textShadow: '0 0 2px rgba(0,0,0,0.2)',
-                opacity: 0.02,
+                opacity: 0.05,
             }}
         >
-          {asciiFrames[frameIndex]}
+          {randomAnimation.frames[frameIndex]}
         </pre>
             </div>
         </>

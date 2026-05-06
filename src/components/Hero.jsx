@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
-import { asciiFrames } from '../asciiFrames';
+import {useEffect, useState} from 'react';
+import { randomAnimation } from '../asciiAnimations';
 
-export default function Hero({ onTechClick, onVideoClick }) {
+export default function Hero({onTechClick, onVideoClick}) {
+
     const [frameIndex, setFrameIndex] = useState(0);
 
     useEffect(() => {
+        console.log('Animation name:', randomAnimation.name);
+        console.log('Frame rate (ms):', randomAnimation.framerate);
         const interval = setInterval(() => {
-            setFrameIndex((prev) => (prev + 1) % asciiFrames.length);
-        }, 70);
+            setFrameIndex((prev) => (prev + 1) % randomAnimation.frames.length);
+        }, randomAnimation.framerate);
         return () => clearInterval(interval);
     }, []);
 
@@ -24,9 +27,9 @@ export default function Hero({ onTechClick, onVideoClick }) {
             </div>
 
             <div className="ascii-showcase">
-        <pre className="ascii-art-show">
-          {asciiFrames[frameIndex]}
-        </pre>
+                <pre className="ascii-art-show">
+                  {randomAnimation.frames[frameIndex]}
+                </pre>
             </div>
         </section>
     );

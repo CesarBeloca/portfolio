@@ -1,48 +1,128 @@
-import { FaPlayCircle } from "react-icons/fa";
+// src/components/VideoPortfolio.jsx
+import { useState } from "react";
+import { videos } from "../data/videos";
+import { FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 
-const videos = [
-    // Add your video objects here when ready
-    // Example:
-    // {
-    //   id: 1,
-    //   title: "Sample Film",
-    //   description: "Short description",
-    //   thumbnail: "/path/to/thumbnail.jpg",
-    //   link: "https://vimeo.com/..."
-    // }
-];
+const categories = ["All", "Commercial", "Fiction", "Documentary", "Music Video", "Scripted Reality"];
 
 export default function VideoPortfolio() {
-    if (videos.length === 0) {
-        return (
-            <section className="section">
-                <h2 className="section-title">Video Portfolio</h2>
-                <div className="text-center py-12" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-                    <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>🎬 In Construction – videos coming soon.</p>
-                </div>
-            </section>
-        );
-    }
+    const [activeCategory, setActiveCategory] = useState("All");
+    const [modalVideo, setModalVideo] = useState(null);
+
+    const filteredVideos =
+        activeCategory === "All"
+            ? videos
+            : videos.filter((video) => video.category === activeCategory);
+
+    // Helper to get embed URL from Vimeo/YouTube
+    const getEmbedUrl = (url) => {
+        if (!url) return null;
+        // YouTube
+        if (url.includes("youtube.com/watch?v=")) {
+            const videoId = url.split("v=")[1]?.split("&")[0];
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+        // YouTube short link
+        if (url.includes("youtu.be/")) {
+            const videoId = url.split("youtu.be/")[1]?.split("?")[0];
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+        // Vimeo
+        if (url.includes("vimeo.com/")) {
+            const videoId = url.split("vimeo.com/")[1]?.split("?")[0];
+            return `https://player.vimeo.com/video/${videoId}`;
+        }
+        return null;
+    };
+
+    const openModal = (video) => {
+        const embedUrl = getEmbedUrl(video.url);
+        if (embedUrl) setModalVideo(embedUrl);
+        else alert("No embeddable video link available.");
+    };
+
+    const closeModal = () => setModalVideo(null);
 
     return (
         <section className="section">
             <h2 className="section-title">Video Portfolio</h2>
-            <div className="video-grid">
-                {videos.map((video) => (
-                    <div key={video.id} className="video-card">
-                        <a href={video.link} target="_blank" rel="noopener noreferrer" className="video-thumbnail">
-                            <img src={video.thumbnail} alt={video.title} />
-                            <div className="play-overlay">
-                                <FaPlayCircle className="play-icon" />
-                            </div>
-                        </a>
-                        <div className="video-content">
-                            <h3 className="video-title">{video.title}</h3>
-                            <p className="video-description">{video.description}</p>
-                        </div>
-                    </div>
+
+            {/* Filter buttons */}
+            <div className="filter-buttons">
+                {categories.map((cat) => (
+                    <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
+                    >
+                        {cat}
+                    </button>
                 ))}
             </div>
+
+            {filteredVideos.length === 0 ? (
+                <div className="text-center py-12 text-gray-500">No videos in this category yet.</div>
+            ) : (
+                <div className="video-grid">
+                    {filteredVideos.map((video) => (
+                        <div key={video.id} className="video-card">
+                            <div className="video-thumbnail" onClick={() => openModal(video)}>
+                                {video.url ? (
+                                    <>
+                                        <img
+                                            src={video.thumbnail || `/video-thumbnails/${video.id}.png`}
+                                            alt={video.title}
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = `https://placehold.co/480x270?text=${encodeURIComponent(video.title)}`;
+                                            }}
+                                        />
+                                        <div className="play-overlay">
+                                            <FaExternalLinkAlt className="play-icon" />
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="w-full h-48 bg-gray-700 flex items-center justify-center text-gray-400">
+                                        No video yet
+                                    </div>
+                                )}
+                            </div>
+                            <div className="video-content">
+                                <h3 className="video-title">{video.title}</h3>
+                                {video.year && <p className="text-sm text-gray-400">{video.year}</p>}
+                                {video.series && <p className="text-xs text-gray-500 italic">Series: {video.series}</p>}
+                                <div className="flex flex-wrap gap-2 mt-2">
+                                    <span className="category-badge">{video.category}</span>
+                                    {video.tags.map((tag) => (
+                                        <span key={tag} className="tag-badge">
+                      {tag}
+                    </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            {/* Modal */}
+            {modalVideo && (
+                <div className="modal-overlay" onClick={closeModal}>
+                    <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close" onClick={closeModal}>
+                            <FaTimes />
+                        </button>
+                        <iframe
+                            src={modalVideo}
+                            title="Video player"
+                            frameBorder="0"
+                            allow="autoplay; fullscreen"
+                            allowFullScreen
+                            className="modal-iframe"
+                        />
+                    </div>
+                </div>
+            )}
         </section>
     );
 }

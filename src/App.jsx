@@ -1,19 +1,19 @@
-import AsciiBackground  from "./components/AsciiBackground.jsx";
+import AsciiBackground from "./components/AsciiBackground.jsx";
 
-import { useRef, useState, useEffect } from "react";
+import {useRef, useState, useEffect} from "react";
 import Hero from "./components/Hero";
 import FrontendProjects from "./components/FrontendProjects";
 import BackendProjects from "./components/BackendProjects";
 import VideoPortfolio from "./components/VideoPortfolio";
 import About from "./components/About";
 import Footer from "./components/Footer";
+
 function App() {
 
     const [activeSection, setActiveSection] = useState('tech');
     const [showHero, setShowHero] = useState(true);
     const [navbarRevealed, setNavbarRevealed] = useState(false);
     const sectionRef = useRef(null);
-    // Reveal navbar after first scroll down (and keep visible)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -35,9 +35,9 @@ function App() {
             else if (section === 'about') elementId = 'about-title';
             if (elementId) {
                 const el = document.getElementById(elementId);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                if (el) el.scrollIntoView({behavior: 'smooth'});
             } else {
-                sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+                sectionRef.current?.scrollIntoView({behavior: 'smooth'});
             }
         }, 100);
     };
@@ -45,7 +45,7 @@ function App() {
 
         setShowHero(true);
         setActiveSection('tech');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
 
@@ -54,7 +54,7 @@ function App() {
             <div>
                 <nav className={`navbar ${!navbarRevealed ? 'navbar-hidden' : ''}`}>
                     <div className="navbar-container">
-                        <div className="navbar-brand" onClick={goHome} style={{ cursor: 'pointer' }}>
+                        <div className="navbar-brand" onClick={goHome} style={{cursor: 'pointer'}}>
                             Cesar Lopes de Mendonca
                         </div>
                         <div className="navbar-links">
@@ -73,30 +73,30 @@ function App() {
                 </nav>
 
                 {showHero && (
-                    <Hero onTechClick={() => showSection('tech')} onVideoClick={() => showSection('video')} />
+                    <Hero onTechClick={() => showSection('tech')} onVideoClick={() => showSection('video')}/>
                 )}
 
                 <div ref={sectionRef}>
                     {activeSection === 'tech' && (
                         <div className="section">
-                            <FrontendProjects />
-                            <BackendProjects />
+                            <FrontendProjects/>
+                            <BackendProjects/>
                         </div>
                     )}
                     {activeSection === 'video' && (
                         <div className="section">
-                            <VideoPortfolio />
+                            <VideoPortfolio/>
                         </div>
                     )}
                     {activeSection === 'about' && (
                         <div className="section">
-                            <About />
+                            <About/>
                         </div>
                     )}
                 </div>
 
-                <Footer />
-                <AsciiBackground />
+                <Footer/>
+                <AsciiBackground/>
             </div>
         </div>
     );
