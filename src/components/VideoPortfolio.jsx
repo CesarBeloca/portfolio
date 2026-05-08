@@ -1,42 +1,60 @@
-// src/components/VideoPortfolio.jsx
 import { useState } from "react";
 import { videos } from "../data/videos";
 import { FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 
+const sortedVideos = [...videos].sort((a, b) => {
+    if (a.year === null && b.year === null) return 0;
+    if (a.year === null) return 1;
+    if (b.year === null) return -1;
+    return b.year - a.year;
+});
+
 const categories = ["All", "Commercial", "Fiction", "Documentary", "Music Video", "Scripted Reality"];
 
-export default function VideoPortfolio() {
-    const [activeCategory, setActiveCategory] = useState("All");
-    const [modalVideo, setModalVideo] = useState(null);
 
-    const filteredVideos =
-        activeCategory === "All"
-            ? videos
-            : videos.filter((video) => video.category === activeCategory);
+    export default function VideoPortfolio() {
+        const [activeCategory, setActiveCategory] = useState("All");
+        const [modalVideo, setModalVideo] = useState(null);
 
-    // Helper to get embed URL from Vimeo/YouTube
-    const getEmbedUrl = (url) => {
-        if (!url) return null;
+        const filteredVideos = activeCategory === "All"
+            ? sortedVideos
+            : sortedVideos.filter((video) => video.category === activeCategory);
+
+    const getEmbedUrl = (video) => {
+        if (!video.url) return null;
+        const { url, start, end } = video;
         // YouTube
         if (url.includes("youtube.com/watch?v=")) {
             const videoId = url.split("v=")[1]?.split("&")[0];
-            return `https://www.youtube.com/embed/${videoId}`;
+            let embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            const params = [];
+            if (start && !isNaN(start)) params.push(`start=${start}`);
+            if (end && !isNaN(end)) params.push(`end=${end}`);
+            if (params.length) embedUrl += `?${params.join('&')}`;
+            return embedUrl;
         }
         // YouTube short link
         if (url.includes("youtu.be/")) {
             const videoId = url.split("youtu.be/")[1]?.split("?")[0];
-            return `https://www.youtube.com/embed/${videoId}`;
+            let embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            const params = [];
+            if (start && !isNaN(start)) params.push(`start=${start}`);
+            if (end && !isNaN(end)) params.push(`end=${end}`);
+            if (params.length) embedUrl += `?${params.join('&')}`;
+            return embedUrl;
         }
         // Vimeo
         if (url.includes("vimeo.com/")) {
             const videoId = url.split("vimeo.com/")[1]?.split("?")[0];
-            return `https://player.vimeo.com/video/${videoId}`;
+            let embedUrl = `https://player.vimeo.com/video/${videoId}`;
+            if (start) embedUrl += `#t=${start}s`;
+            return embedUrl;
         }
         return null;
     };
 
     const openModal = (video) => {
-        const embedUrl = getEmbedUrl(video.url);
+        const embedUrl = getEmbedUrl(video);
         if (embedUrl) setModalVideo(embedUrl);
         else alert("No embeddable video link available.");
     };
@@ -47,7 +65,6 @@ export default function VideoPortfolio() {
         <section className="section">
             <h2 className="section-title">Video Portfolio</h2>
 
-            {/* Filter buttons */}
             <div className="filter-buttons">
                 {categories.map((cat) => (
                     <button
@@ -77,7 +94,7 @@ export default function VideoPortfolio() {
                                                 e.target.src = `https://placehold.co/480x270?text=${encodeURIComponent(video.title)}`;
                                             }}
                                         />
-                                        <div className="play-overlay">
+                                         <div className="play-overlay">
                                             <FaExternalLinkAlt className="play-icon" />
                                         </div>
                                     </>
@@ -113,6 +130,7 @@ export default function VideoPortfolio() {
                             <FaTimes />
                         </button>
                         <iframe
+                            key={modalVideo}
                             src={modalVideo}
                             title="Video player"
                             frameBorder="0"
