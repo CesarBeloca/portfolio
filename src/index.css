@@ -752,5 +752,31 @@ html, body {
         white-space: pre;
     }
 }
+/* Mobile fixes for ASCII showcase */
+@media (max-width: 768px) {
+    .ascii-showcase {
+        width: 100%;
+        max-width: 100%;
+        position: static;
+        margin: 1rem auto;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .ascii-art-show {
+        font-size: 0.35rem !important;   /* much smaller on phones */
+        line-height: 1.1;
+        white-space: pre;
+        display: inline-block;
+        min-width: 100%;
+    }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+    .ascii-art-show {
+        font-size: 0.3rem !important;
+    }
+}
 
 
