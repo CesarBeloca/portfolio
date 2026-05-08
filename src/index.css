@@ -695,3 +695,62 @@ html, body {
 .tag-badge:hover {
     background-color: #4b5563;
 }
+
+/* Mobile fixes for hero title and ASCII showcase */
+@media (max-width: 768px) {
+    .hero-text {
+        position: static;
+        text-align: center;          /* center title on mobile */
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;           /* reduce title size */
+        text-align: center;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    /* ASCII showcase – smaller and centered */
+    .ascii-showcase {
+        position: static;
+        width: 95%;
+        margin: 1rem auto;
+        max-width: 95%;
+        overflow-x: auto;            /* allow horizontal scroll if needed */
+    }
+
+    .ascii-art-show {
+        font-size: 0.5rem;           /* smaller text to fit screen */
+        white-space: pre-wrap;       /* allow wrapping – but ASCII art may break, better to scroll */
+        word-break: keep-all;
+    }
+}
+
+/* Very small phones (width < 480px) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    .ascii-art-show {
+        font-size: 0.45rem;
+    }
+    .ascii-showcase {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .ascii-art-show {
+        display: inline-block;
+        white-space: pre;
+    }
+}
+
+
