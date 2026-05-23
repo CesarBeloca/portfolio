@@ -13,7 +13,7 @@ export const videos = [
     { id: 14, title: "M&M Corporate", year: 2011, category: "Documentary", tags: ["edit"], url: "https://vimeo.com/66162498", thumbnail: "" },
     { id: 13, title: "Bez Litosti (No Pity)", year: 2018, category: "Documentary", tags: ["edit","direction","script"], url: "https://vimeo.com/464865927", thumbnail: "" },
     // Fiction (including Zachranari episodes)
-    { id: 10, title: "Gotcha", year: 2023, category: "Fiction", tags: ["edit"], url: "https://vimeo.com/790167352", thumbnail: "" },
+    { id: 10, title: "Gotcha", year: 2023, category: "Web Series", tags: ["edit"], url: "https://vimeo.com/790167352", thumbnail: "" },
     { id: 12, title: "As Boys Grow", year: 2011, category: "Fiction", tags: ["edit","direction","script"], url: "https://vimeo.com/471460026", thumbnail: "" },
     { id: 15, title: "Brian & Klara - Portfolio", year: 2020, category: "Fiction", tags: ["direction","edit"], url: "https://vimeo.com/584313953", thumbnail: "" },
     { id: 16, title: "Brian & Amy - Portfolio", year: 2020, category: "Fiction", tags: ["direction","edit"], url: "https://vimeo.com/567094921", thumbnail: "" },
@@ -29,4 +29,10 @@ export const videos = [
     { id: 23, title: "Aleš Brixi - Už zase skáču přes kaluže", year: 2019, category: "Music Video", tags: ["script","direction"], url: "https://www.youtube.com/watch?v=siQN4LKRLb8", thumbnail: "" },
     // Web Series
     { id: 24, title: "Benevore - Can we prevent future pandemics?", year: 2021, category: "Web Series", tags: ["script","direction", "edit"], url: "https://www.youtube.com/watch?v=cumKMonQPHw", thumbnail: "" },
+    { id: 25, title: "Close Quarter Battle - Ep.2 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=AFUNx-PM_gU", thumbnail: "" },
+    { id: 26, title: "Close Quarter Battle - Ep.3 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=3VVT28_GHoU", thumbnail: "" },
+    { id: 27, title: "Close Quarter Battle - Ep.4 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=aKNmLQfGDas", thumbnail: "" },
+    { id: 28, title: "Close Quarter Battle - Ep.1 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=GljS06Q9SaE", thumbnail: "" },
+    { id: 29, title: "Close Quarter Battle - Ep.6 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=2TMNA0ddkn0&t=318s", thumbnail: "" },
+    { id: 30, title: "Close Quarter Battle - Ep.11 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=2TMNA0ddkn0&t=314s", thumbnail: "" },
 ];

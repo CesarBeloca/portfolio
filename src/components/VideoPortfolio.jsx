@@ -9,7 +9,7 @@ const sortedVideos = [...videos].sort((a, b) => {
     return b.year - a.year;
 });
 
-const categories = ["All", "Commercial", "Fiction", "Documentary", "Music Video", "Scripted Reality"];
+const categories = ["All", "Commercial", "Fiction", "Documentary", "Music Video", "Scripted Reality", "Web Series"];
 
 
 export default function VideoPortfolio() {
