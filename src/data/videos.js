@@ -35,4 +35,6 @@ export const videos = [
     { id: 28, title: "Close Quarter Battle - Ep.1 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=GljS06Q9SaE", thumbnail: "" },
     { id: 29, title: "Close Quarter Battle - Ep.6 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=2TMNA0ddkn0&t=318s", thumbnail: "" },
     { id: 30, title: "Close Quarter Battle - Ep.11 ", year: 2012, category: "Documentary", tags: [ "edit"], url: "https://www.youtube.com/watch?v=2TMNA0ddkn0&t=314s", thumbnail: "" },
+    { id: 31, title: "Wifina — 3. dubna 2015", year: 2015, category: "Documentary", tags: [ "edit"], url: "https://decko.ceskatelevize.cz/video/e215543112050014", thumbnail: "" },
+
 ];
