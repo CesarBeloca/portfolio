@@ -27,4 +27,6 @@ export const videos = [
     { id: 11, title: "Unholy Preachers - Troublemakers (official clip)", year: 2013, category: "Music Video", tags: ["edit","direction","script"], url: "https://www.youtube.com/watch?v=zDc-RN5g0Go", thumbnail: "" },
     { id: 17, title: "Stronghold - Restless soul", year: 2008, category: "Music Video", tags: ["camera","script","direction","edit"], url: "https://www.youtube.com/watch?v=PLsKBuOVXbY", thumbnail: "" },
     { id: 23, title: "Aleš Brixi - Už zase skáču přes kaluže", year: 2019, category: "Music Video", tags: ["script","direction"], url: "https://www.youtube.com/watch?v=siQN4LKRLb8", thumbnail: "" },
+    // Web Series
+    { id: 24, title: "Benevore - Can we prevent future pandemics?", year: 2021, category: "Web Series", tags: ["script","direction", "edit"], url: "https://www.youtube.com/watch?v=cumKMonQPHw", thumbnail: "" },
 ];
